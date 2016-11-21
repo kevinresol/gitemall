@@ -10,11 +10,11 @@ The current folder must be initialized with git
 
 ## Install
 
-`haxelib install --global gitemall`
+`haxelib --global install gitemall`
 
 ## Usage
 
-`haxelib run --global gitemall [hxml]`
+`haxelib --global run gitemall [hxml]`
 
 This command will do the following things:
 

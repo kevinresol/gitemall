@@ -159,7 +159,7 @@ class Main {
 	}
 	
 	function showUsage<T>():T {
-		println('Usage: haxelib run --global gitemall [hxml]');
+		println('Usage: haxelib --global run gitemall [hxml]');
 		exit(0);
 		return null;
 	}
