@@ -1,0 +1,16 @@
+{
+  "name": "gitemall",
+  "main": "Main",
+  "license": "MIT",
+  "tags": [
+    "haxelib",
+    "git"
+  ],
+  "classPath": "src",
+  "contributors": [
+    "kevinresol"
+  ],
+  "releasenote": "initial release",
+  "version": "0.0.0",
+  "dependencies": {}
+}
