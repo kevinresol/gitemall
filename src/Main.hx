@@ -41,6 +41,7 @@ class Main {
 			}
 			var url = getLibUrl(lib);
 			addSubmodule(lib, url);
+			haxelibInstall(lib);
 			var haxelibJson = findHaxelibJson('haxelib/$lib/');
 			var libs = parseHaxelibJson(haxelibJson);
 			info(libs.length > 0 ? '$lib has the following dependencies: ' + libs.join(', ') : '$lib has no dependencies');
@@ -142,6 +143,13 @@ class Main {
 		if(!f.exists()) return false;
 		for(line in f.getContent().split('\n')) if(submoduleRe.match(line) && submoduleRe.matched(1) == relPath) return true;
 		return false;
+	}
+	
+	function haxelibInstall(name:String) {
+		info('Installing haxelib $name');
+		var f = '.haxelib/$name';
+		if(!f.exists()) f.createDirectory();
+		'$f/.dev'.saveContent('haxelib/$name');
 	}
 	
 	function prompt(msg:String) {
