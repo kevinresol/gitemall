@@ -55,7 +55,7 @@ class Main {
 	
 	function prepare() {
 		var git = '.git';
-		if(!git.exists() || !git.isDirectory()) fail('Current directory is not a git repo ($cwd)');
+		if(!git.exists() || !git.isDirectory()) fail('Current directory is not a git repo, run `git init` first ($cwd)');
 		function create(f:String) {
 			if(!f.exists()) f.createDirectory();
 		}

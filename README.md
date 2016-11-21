@@ -4,7 +4,6 @@ Install Haxe libraries with git.
 Until there is a Haxe library manager that does proper version locking (as in CocoaPods or Yarn),
 I prefer checking-in all my haxelibs in my project's git.
 
-
 ## Prerequisite
 
 The current folder must be initialized with git
