@@ -41,14 +41,16 @@ class Main {
 			}
 			var url = getLibUrl(lib);
 			addSubmodule(lib, url);
-			haxelibInstall(lib);
 			var haxelibJson = findHaxelibJson('haxelib/$lib/');
+			haxelibInstall(lib, haxelibJson.directory());
 			var libs = parseHaxelibJson(haxelibJson);
 			info(libs.length > 0 ? '$lib has the following dependencies: ' + libs.join(', ') : '$lib has no dependencies');
 			for(lib in libs) handleLib(lib);
 		}
 		
 		for(lib in libs) handleLib(lib);
+		
+		updateSubmodules();
 		
 		info('Done!');
 	}
@@ -129,9 +131,16 @@ class Main {
 	}
 	
 	function addSubmodule(name:String, url:String) {
-		var dest = 'haxelib/$name';
 		info('Adding $name as submodule from $url');
-		var proc = new Process('git', ['submodule', 'add', url, dest]);
+		var proc = new Process('git', ['submodule', 'add', url, 'haxelib/$name']);
+		var out = proc.stdout.readAll().toString();
+		var err = proc.stderr.readAll().toString();
+		if(proc.exitCode() != 0) fail(err);
+	}
+	
+	function updateSubmodules() {
+		info('Updating submodules');
+		var proc = new Process('git', ['submodule', 'update', '--init', '--recursive']);
 		var out = proc.stdout.readAll().toString();
 		var err = proc.stderr.readAll().toString();
 		if(proc.exitCode() != 0) fail(err);
@@ -145,11 +154,12 @@ class Main {
 		return false;
 	}
 	
-	function haxelibInstall(name:String) {
-		info('Installing haxelib $name');
+	function haxelibInstall(name:String, path:String) {
+		if(path.endsWith('/')) path = path.substr(0, path.length - 1);
+		info('Installing haxelib $name at $path');
 		var f = '.haxelib/$name';
 		if(!f.exists()) f.createDirectory();
-		'$f/.dev'.saveContent('haxelib/$name');
+		'$f/.dev'.saveContent(path);
 	}
 	
 	function prompt(msg:String) {
