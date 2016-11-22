@@ -4,10 +4,6 @@ Install Haxe libraries with git.
 Until there is a Haxe library manager that does proper version locking (as in CocoaPods or Yarn),
 I prefer checking-in all my haxelibs in my project's git as submodules.
 
-## Prerequisite
-
-The current folder must be initialized with git
-
 ## Install
 
 `haxelib --global install gitemall`
@@ -16,7 +12,16 @@ The current folder must be initialized with git
 
 `haxelib --global run gitemall [hxml]`
 
-This command will do the following things:
+## Quick Start
+
+0. Create a directory: `mkdir my_new_proj`
+0. Initialize Git: `cd my_new_proj && git init`
+0. Write a hxml file: `echo "-main Main -js bin/index.js -lib tink_web -lib buddy" > build.hxml`
+0. Git'em All!!! `haxelib --global run gitemall` (Be prepared to input urls manually when they can't be found)
+
+## Explained
+
+This little program will do the following things:
 
 0. Create folder `.haxelib` & `haxelib`, if not yet exist
 0. Parse the hxml in current directory
