@@ -10,6 +10,7 @@
   "contributors": [
     "kevinresol"
   ],
+  "description": "Install Haxe libraries with git",
   "releasenote": "Update submodules",
   "version": "1.0.3",
   "dependencies": {}
